@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "lib/omniauth-alephx.rb",
     "lib/omniauth-alephx/version.rb",
     "lib/omniauth/strategies/alephx.rb",
+    "omniauth-alephx.gemspec",
     "test/helper.rb",
     "test/test_omniauth-alephx.rb"
   ]
