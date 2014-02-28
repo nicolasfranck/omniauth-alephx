@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
+    "VERSION",
     "lib/omniauth-alephx.rb",
     "lib/omniauth-alephx/version.rb",
     "lib/omniauth/strategies/alephx.rb",
