@@ -8,7 +8,7 @@ module OmniAuth
 
       #required
       option :url # :url => "http://aleph.ugent.be/X"
-      option :library, # :library => "rug50"
+      option :library # :library => "rug50"
 
       #only for test purpose (if you do not specify the option :form, a form will be created, using these options)
       option :title_form, "Aleph authentication"
