@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "omniauth-alephx"
   gem.homepage = "http://github.com/nicolasfranck/omniauth-alephx"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = "omniauth strategy for authenticating against AlephX Service"
+  gem.description = "omniauth strategy for authenticating against AlephX Service"
   gem.email = "nicolas.franck@ugent.be"
   gem.authors = ["Nicolas Franck"]
   # dependencies defined in Gemfile
