@@ -1,4 +1,4 @@
-#OmniAuth Alephx Strategy [![Gem Version][version_badge]][version] [![Build Status][travis_status]][travis]
+#OmniAuth Alephx Strategy
 
 ## Installation
 
