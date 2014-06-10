@@ -10,19 +10,18 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nicolas Franck"]
-  s.date = "2014-02-28"
+  s.date = "2014-06-10"
   s.description = "omniauth strategy for authenticating against AlephX Service"
   s.email = "nicolas.franck@ugent.be"
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
-    "README.rdoc",
     "Rakefile",
     "VERSION",
     "lib/omniauth-alephx.rb",

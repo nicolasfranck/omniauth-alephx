@@ -9,7 +9,7 @@ module OmniAuth
       #required
       option :url # :url => "http://aleph.ugent.be/X"
       option :library # :library => "rug50"
-
+      
       #only for test purpose (if you do not specify the option :form, a form will be created, using these options)
       option :title_form, "Aleph authentication"
       option :label_password,:password
@@ -17,6 +17,14 @@ module OmniAuth
       option :label_submit, "submit"
 
       @user_info = {}
+
+      class << self
+        attr_accessor :filters
+        def add_filter(&block)
+          @filters = [] if @filters.nil?
+          @filters << block
+        end
+      end
 
       uid {
         @user_info[:bor_id]
@@ -54,6 +62,13 @@ module OmniAuth
         begin
 
           params = request.params
+
+          unless self.class.filters.nil?
+            self.class.filters.each do |filter|
+              filter.call(params)
+            end
+          end
+
           username = params['username']
           password = params['password']         
           
