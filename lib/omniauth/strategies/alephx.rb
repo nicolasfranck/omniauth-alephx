@@ -1,5 +1,6 @@
 require 'omniauth'
 require 'xmlsimple'
+require 'uri'
 
 module OmniAuth
   module Strategies
@@ -19,7 +20,8 @@ module OmniAuth
       @user_info = {}
 
       class << self
-        attr_accessor :filters
+        attr_accessor :filters,:on_error
+        
         def add_filter(&block)
           @filters = [] if @filters.nil?
           @filters << block
@@ -31,7 +33,7 @@ module OmniAuth
       }
       info {
         { 
-          :name => @user_info[:bor_id],
+          :name => @user_info[:name],
           :email => @user_info[:email]
         }
       }
@@ -54,14 +56,18 @@ module OmniAuth
 
       def callback_phase          
 
+        params = request.params
+
+        rp = request_path+"?"+{ :username => params['username'] }.to_query
+
         if missing_credentials?
           session['omniauth.alephx.error'] = :missing_credentials
-          return redirect(request_path)
+          self.class.on_error.call(:missing_credentials) unless self.class.on_error.nil?
+          return redirect(rp)
         end
 
         begin
 
-          params = request.params
 
           unless self.class.filters.nil?
             self.class.filters.each do |filter|
@@ -74,13 +80,17 @@ module OmniAuth
           
           unless bor_auth(username,password)                
             session['omniauth.alephx.error'] = :invalid_credentials
-            return redirect(request_path)
+            self.class.on_error.call(:invalid_credentials) unless self.class.on_error.nil?
+            return redirect(rp)
           end
 
         rescue Exception => e
           session['omniauth.alephx.error'] = :invalid_credentials
-          return redirect(request_path)
+          self.class.on_error.call(:invalid_credentials) unless self.class.on_error.nil?
+          return redirect(rp)
         end
+
+        session.delete('omniauth.alephx.error')
 
         super
       end
@@ -105,7 +115,8 @@ module OmniAuth
         return false if document['error']
 
         @user_info = {
-          :bor_id => username,
+          #user pwd to communicate with aleph (cannot extract cas username or barcode from alephx!)
+          :bor_id => document['z303']['z303-id'],
           :name => document['z303']['z303-name'],
           :email => document['z304']['z304-email-address']
         }          
