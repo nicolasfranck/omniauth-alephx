@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/nicolasfranck/omniauth-alephx"
   s.licenses = ["MIT"]
   s.summary = "omniauth strategy for authenticating against AlephX Service"
-  s.add_dependency('omniauth-alephx','1.3.2')
+  s.add_dependency('omniauth','1.3.2')
   s.add_dependency('xml-simple','1.1.5')
 end
 
